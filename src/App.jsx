@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+const apiKey = import.meta.env.VITE_API_KEY;
 
 function Weather() {
   const [weather, setWeather] = useState(null); // Initialize with null instead of ''
@@ -8,7 +9,8 @@ function Weather() {
 
   const getGeocodes = async () => {
     try {
-      const response = await fetch('http://api.openweathermap.org/geo/1.0/direct?q=Belfast,GB&limit=1&appid=54c7b7c4cd747a21c78c1b8fcde4b2fc');
+      const response = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=Belfast,GB&limit=1&appid=${apiKey}`
+      );
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
@@ -23,7 +25,7 @@ function Weather() {
 
   const getWeather = async (lat, lon) => {
     try {
-      const response = await fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=54c7b7c4cd747a21c78c1b8fcde4b2fc&units=metric`);
+      const response = await fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`);
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
